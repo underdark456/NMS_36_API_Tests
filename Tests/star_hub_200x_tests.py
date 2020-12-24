@@ -15,6 +15,8 @@ class TestingMethods(unittest.TestCase):
     def test_dhcp(self):
         self.assertEqual(star_hub_200x_ip_protocols.DHCP(),star_hub_200x_ip_protocols_api.dhcp())
 
+    def test_dns(self):
+        self.assertEqual(star_hub_200x_ip_protocols.DNS(),star_hub_200x_ip_protocols_api.dns())
 
 if __name__ == '__main__':
     unittest.main()

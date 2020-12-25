@@ -9,7 +9,7 @@ def snmp():
 
 
 def dhcp():
-    '''join converts /xx mask to cidr(like 255.255.255.9'''
+    '''join converts /xx mask to cidr(like 255.255.255.9)'''
     return objects.star_hub_200x_json()['data']['dhcp_enable'], \
            objects.star_hub_200x_json()['data']['dhcp_vlan'], \
            objects.star_hub_200x_json()['data']['dhcp_ip_start'], \

@@ -25,3 +25,9 @@ def dhcp():
 def dns():
     return objects.star_hub_200x_json()['data']['dns_enable'], \
            objects.star_hub_200x_json()['data']['dns_clear_timeout']
+
+def nat():
+    return objects.star_hub_200x_json()['data']['nat_enable'], \
+           objects.star_hub_200x_json()['data']['nat_external_ip'], \
+           objects.star_hub_200x_json()['data']['nat_internal_network'], \
+           objects.star_hub_200x_json()['data']['nat_internal_mask'], \

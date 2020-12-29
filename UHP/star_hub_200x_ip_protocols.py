@@ -1,11 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from bs4 import SoupStrainer
 
 
-sh_200x_url = 'http://10.0.3.152/'
+sh_200x_url = 'http://10.0.3.149/'
 
-'''По поводу галочек...Тэг checked появляется только когда галка enable on.'''
+
+'''По поводу галочек...Тэг checked появляется только когда галка enable on.
+   Чекбоксы находятся по соответствующему name'''
+
 def SNMP():
     SNMP_respone = requests.get(f'{sh_200x_url}cc9')
     soup = BeautifulSoup(SNMP_respone.text, 'lxml')
@@ -15,33 +17,29 @@ def SNMP():
 def DHCP():
     DHCP_respone = requests.get(f'{sh_200x_url}cc8')
     soup = BeautifulSoup(DHCP_respone.text, 'lxml')
-    DHCP_values = tuple([element['value'] for element in soup.findAll('input', {'type': 'text'})])
-    mode = tuple([element['value'] for element in soup.find_all('option', selected=True)])
-    return mode + DHCP_values
+    DHCP_values = [element['value'] for element in soup.findAll('input', {'type': 'text'})]
+    mode = soup.find('option', selected=True)['value']
+    return (mode,) + (*DHCP_values,)
 
 def DNS():
     DNS_respone = requests.get(f'{sh_200x_url}cc59')
     soup = BeautifulSoup(DNS_respone.text, 'lxml')
-    DNS_values = tuple([element['value'] for element in soup.findAll('input', {'type': 'text'})])
-    DNS_values = str(DNS_values[0])
-    mode = soup.find_all('input', checked=True)
-    mode = str(mode)
+    Clear_timeout = soup.find('input', attrs={'name': 'db'})['value']
+    mode = str(soup.find_all('input', checked=True))
     if "1" not in mode:
-        return ("0",) + (DNS_values,)
+        return ("0",) + (Clear_timeout,)
     else:
-        return ("0",) + (DNS_values,)
+        return ("1",) + (Clear_timeout,)
 
 def ARP():
     ARP_respone = requests.get(f'{sh_200x_url}cc23')
     soup = BeautifulSoup(ARP_respone.text, 'lxml')
-    Arp_table_clear = tuple([element['value'] for element in soup.findAll('input', {'type': 'text'})])
-    Arp_table_clear = str(Arp_table_clear[0])
-    mode = soup.find_all('input', checked=True)
-    mode = str(mode)
+    Arp_table_clear = soup.find('input', attrs={'name': 'da'})['value']
+    mode = str(soup.find_all('input', checked=True))
     if "1" not in mode:
         return (Arp_table_clear,) + ("0",)
     else:
-        return (Arp_table_clear,) + ("0",)
+        return (Arp_table_clear,) + ("1",)
 
 def NAT():
     NAT_respone = requests.get(f'{sh_200x_url}cc7')
@@ -52,10 +50,69 @@ def NAT():
     External_port = soup.findAll("td")[9].text
     Internal_IP = soup.findAll("td")[10].text
     Internal_port = soup.findAll("td")[11].text
-    mode = soup.find_all('input', checked=True)
-    mode = str(mode)
+    mode = str(soup.find_all('input', checked=True))
     if "1" not in mode:
          return ("0",) + (External_IP,Internal_network,Internal_mask,External_port,Internal_IP,Internal_port)
     else:
          return ("1",) + (External_IP,Internal_network,Internal_mask,External_port,Internal_IP,Internal_port)
+
+def RIP():
+    RIP_respone = requests.get(f'{sh_200x_url}cc10')
+    soup = BeautifulSoup(RIP_respone.text, 'lxml')
+    Gateway_IP = soup.find('input', attrs={'name': 'ia'})['value']
+    Routes_cost = soup.find('input', attrs={'name': 'de'})['value']
+    mode = str(soup.find('input',attrs={'name': 'db'}, checked=True))
+    if "1" not in mode:
+        part1 = ("0",Gateway_IP)
+    else:
+        part1 = ("1",Gateway_IP)
+    Omit_down_stations = str(soup.find('input',attrs={'name': 'dc'}, checked=True))
+    if "1" not in Omit_down_stations:
+        part2 = (*part1,) + ("0",)
+    else:
+        part2 = (*part1,) + ("1",)
+    Couple_to_SM_alarms = str(soup.find('input',attrs={'name': 'dd'}, checked=True))
+    if "1" not in Couple_to_SM_alarms:
+        return (*part2,"0",Routes_cost)
+    else:
+        return (*part2,"1",Routes_cost)
+
+def SNTP():
+    SNTP_respone = requests.get(f'{sh_200x_url}cc11')
+    soup = BeautifulSoup(SNTP_respone.text, 'lxml')
+    Server_IP = soup.find('input', attrs={'name': 'ia'})['value']
+    VLAN = soup.find('input', attrs={'name': 'dc'})['value']
+    mode = soup.find('option', selected=True)['value']
+    return (mode,Server_IP,VLAN,)
+
+def TFTP():
+    TFTP_respone = requests.get(f'{sh_200x_url}cc21')
+    soup = BeautifulSoup(TFTP_respone.text, 'lxml')
+    Server_IP = soup.find('input', attrs={'name': 'ia'})['value']
+    VLAN = soup.find('input', attrs={'name': 'db'})['value']
+    return (Server_IP,VLAN)
+
+def Multicast():
+    Multicast_respone = requests.get(f'{sh_200x_url}cc39')
+    soup = BeautifulSoup(Multicast_respone.text, 'lxml')
+    Multicast_timeout = soup.find('input', attrs={'name': 'da'})['value']
+    mode = soup.find('option', selected=True)['value']
+    return (mode,Multicast_timeout)
+
+def TCP_Acceleration():
+    TCP_Acceleration_respone = requests.get(f'{sh_200x_url}cc12')
+    soup = BeautifulSoup(TCP_Acceleration_respone.text, 'lxml')
+    version = soup.find('option', selected=True)['value']
+    values = tuple([element['value'] for element in soup.findAll('input', {'type': 'text'})])
+    mode = str(soup.find('input', attrs={'name': 'da'}, checked=True))
+    if "1" not in mode:
+        return ("0",version,*values)
+    else:
+        return ("1",version,*values)
+
+def IP_screening():
+    IP_screening_respone = requests.get(f'{sh_200x_url}cc13')
+    soup = BeautifulSoup(IP_screening_respone.text, 'lxml')
+    mode = soup.find('option', selected=True)['value']
+    return mode
 

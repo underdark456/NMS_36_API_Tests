@@ -114,5 +114,3 @@ def IP_screening():
     soup = BeautifulSoup(IP_screening_respone.text, 'lxml')
     mode = soup.find('option', selected=True)['value']
     return mode
-
-print(DHCP())

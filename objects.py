@@ -2,6 +2,7 @@ import requests
 import json
 import options
 
+
 def cidr_to_netmask(cidr):
   cidr = int(cidr)
   mask = (0xffffffff >> (32 - cidr)) << (32 - cidr)
@@ -10,20 +11,38 @@ def cidr_to_netmask(cidr):
           str( (0x0000ff00 & mask) >> 8)    + '.' +
           str( (0x000000ff & mask)))
 
+class sh_200x:
 
-class star_hub_200x:
+    def sh_200x_url():
+        url_uhp = 'http://10.0.3.149/'
+        url_ip_protocols = 'http://10.0.3.16/#/controller_configure/2/#tab4'
+        return url_uhp, url_ip_protocols
 
-    def star_hub_200x_url():
-        return 'http://10.0.3.152/'
-
-    def star_hub_200x_json():
+    def sh_200x_json():
         data = {
             "object": "controller",
             "action": "select",
-            "id": "52"
+            "id": "2"
         }
-        resp = requests.post(options.api_connection_options(), json=data)
+        resp = requests.post(options.nms_connection_options()[0], json=data)
         parsed = json.dumps(resp.json(), indent=4, sort_keys=True)
         return json.loads(parsed)
 
+
+class ss_100x:
+
+    def ss_100x_url():
+        url_uhp = 'http://10.0.3.155/'
+        url_ip_protocols ='http://10.0.3.16/#/remote/4/update/?net_id=1#tab2'
+        return url_uhp, url_ip_protocols
+
+    def ss_100x_json():
+        data = {
+            "object": "station",
+            "action": "select",
+            "id": "4"
+        }
+        resp = requests.post(options.nms_connection_options()[0], json=data)
+        parsed = json.dumps(resp.json(), indent=4, sort_keys=True)
+        return json.loads(parsed)
 

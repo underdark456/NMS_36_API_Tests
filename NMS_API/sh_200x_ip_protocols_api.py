@@ -1,21 +1,24 @@
 import objects
+from NMS_API.lists.modems import ip_prot
 
 def acceleration():
-    return objects.sh_200x.sh_200x_json()['data']['accel_enable'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_version'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_svlan_from'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_svlan_to'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_mss'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_max_tcp_window'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_tcp_rcvwnd_update'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_sessions'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_buffers'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_max_queue'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_max_mod_queue'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_retransmit_timeout'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_retransmit_tries'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_inactivity_timeout'], \
-           objects.sh_200x.sh_200x_json()['data']['accel_ack_period']
+    return objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[0]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[1]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[2]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[3]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[4]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[5]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[6]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[7]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[8]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[9]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[10]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[11]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[12]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[13]], \
+           objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[14]]
+
+print(acceleration())
 
 def encryption():
     '''Флаг aes v.34/v.35 работает только на прошивках 3.5'''

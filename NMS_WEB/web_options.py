@@ -18,7 +18,6 @@ def get_element_id(driver, selector):
         ec.presence_of_element_located((By.ID, selector))
     )
 
-
 def get_element_xpath(driver, selector):
     return WebDriverWait(driver, 10).until(
         ec.presence_of_element_located((By.XPATH, selector))

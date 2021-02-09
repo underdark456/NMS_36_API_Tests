@@ -38,4 +38,4 @@ def tdma_rf():
     return tdma_rf.name_value('db') + tdma_rf.selects() + tdma_rf.checkboxes() + tdma_rf.values()
 
 
-print(tdm_tx())
+print(tdma_rf())

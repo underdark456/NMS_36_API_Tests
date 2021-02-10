@@ -18,7 +18,6 @@ def acceleration():
            objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[13]], \
            objects.sh_200x.sh_200x_json()['data'][ip_prot.accel[14]]
 
-print(acceleration())
 
 def encryption():
     '''Флаг aes v.34/v.35 работает только на прошивках 3.5'''

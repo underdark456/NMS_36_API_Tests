@@ -26,15 +26,26 @@ class parser_methods():
         return tuple([element['value'] for element in self.soup.findAll('input', checked=True)])
 
     def value(self):
-        return tuple(self.soup.find('input')['value'])
+        for i in self.soup.findAll('input', type=lambda x: x != 'hidden'):
+            return tuple(i['value'])
 
     def name_value(self,name):
-        return tuple([self.soup.find('input', attrs={'name': f'{name}'})['value']])
+            return tuple([self.soup.find('input', attrs={'name': f'{name}'})['value']])
 
     def select(self,name):
         for element in self.soup.find('select', attrs={'name': f'{name}'}):
             if element.has_attr('selected'):
                 return tuple([element['value']])
+
+    def f_sel_text(self,name):
+        return self.soup.find(f'{name}', selected=True).text,
+
+    def check_mode(self,name):
+        if 'checked' in self.soup.find('input',{"name":f"{name}"}).attrs:
+            return '1',
+        else:
+            return '0',
+
 
 
 

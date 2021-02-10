@@ -15,11 +15,12 @@ def tdm_rx():
 
 def tdm_tx():
     tdm_tx = parser_methods(sh_profile['tdm_tx'])
-    return tdm_tx.values() + tdm_tx.select('de') + tdm_tx.checkboxes() + tdm_tx.select('df')
+    return  tdm_tx.name_value('db') + tdm_tx.name_value('dc') + tdm_tx.f_sel_text('option') + tdm_tx.check_mode('dg') \
++ tdm_tx.select('df')
 
 def mod():
     mod = parser_methods(sh_profile['mod'])
-    return mod.checkboxes() + mod.values()
+    return tuple(mod.checkboxes()) + tuple((mod.values()[0] + '.' + mod.values()[1],))
 
 def timing():
     timing = parser_methods(sh_profile['timing'])
@@ -37,5 +38,3 @@ def tdma_rf():
     tdma_rf = parser_methods(sh_profile['tdma_rf'])
     return tdma_rf.name_value('db') + tdma_rf.selects() + tdma_rf.checkboxes() + tdma_rf.values()
 
-
-print(tdma_rf())

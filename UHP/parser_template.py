@@ -30,7 +30,7 @@ class parser_methods():
             return tuple(i['value'])
 
     def name_value(self,name):
-            return tuple([self.soup.find('input', attrs={'name': f'{name}'})['value']])
+            return [self.soup.find('input', attrs={'name': f'{name}'})['value']]
 
     def select(self,name):
         for element in self.soup.find('select', attrs={'name': f'{name}'}):
@@ -61,8 +61,12 @@ sh_profile = dict({
     'tdma_rf' : f'{objects.sh_200x.sh_200x_url()[0]}cd3?da=1',
     'tdma_prot' : f'{objects.sh_200x.sh_200x_url()[0]}cp3?da=1',
     'tdma_bw' : f'{objects.sh_200x.sh_200x_url()[0]}cj3?da=1',
-    'tdma_acm' : f'{objects.sh_200x.sh_200x_url()[0]}cg3?da=1'
+    'tdma_acm' : f'{objects.sh_200x.sh_200x_url()[0]}cg3?da=1',
+    'roaming' : f'{objects.sh_200x.sh_200x_url()[0]}co3?da=1'
 })
+
+
+
 
 #
 # test = parser_methods(sh_profile['tdm_tx'])

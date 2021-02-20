@@ -47,35 +47,17 @@ class parser_methods():
             return '0',
 
 
-
-
-
 sh_profile = dict({
-    'basic' : f'{objects.sh_200x.sh_200x_url()[0]}cb3?da=1',
-    'tdm_rx' : f'{objects.sh_200x.sh_200x_url()[0]}cr3?da=1',
-    'tdm_tx' : f'{objects.sh_200x.sh_200x_url()[0]}ct3?da=1',
-    'mod' : f'{objects.sh_200x.sh_200x_url()[0]}cm3?da=1',
-    'timing' : f'{objects.sh_200x.sh_200x_url()[0]}ci3?da=1',
-    'tlc' : f'{objects.sh_200x.sh_200x_url()[0]}cl3?da=1',
-    'tdm_acm' : f'{objects.sh_200x.sh_200x_url()[0]}ca3?da=1',
-    'tdma_rf' : f'{objects.sh_200x.sh_200x_url()[0]}cd3?da=1',
-    'tdma_prot' : f'{objects.sh_200x.sh_200x_url()[0]}cp3?da=1',
-    'tdma_bw' : f'{objects.sh_200x.sh_200x_url()[0]}cj3?da=1',
-    'tdma_acm' : f'{objects.sh_200x.sh_200x_url()[0]}cg3?da=1',
-    'roaming' : f'{objects.sh_200x.sh_200x_url()[0]}co3?da=1'
+    'basic' : f'{objects.sh_200x_url()[0]}cb3?da=1',
+    'tdm_rx' : f'{objects.sh_200x_url()[0]}cr3?da=1',
+    'tdm_tx' : f'{objects.sh_200x_url()[0]}ct3?da=1',
+    'mod' : f'{objects.sh_200x_url()[0]}cm3?da=1',
+    'timing' : f'{objects.sh_200x_url()[0]}ci3?da=1',
+    'tlc' : f'{objects.sh_200x_url()[0]}cl3?da=1',
+    'tdm_acm' : f'{objects.sh_200x_url()[0]}ca3?da=1',
+    'tdma_rf' : f'{objects.sh_200x_url()[0]}cd3?da=1',
+    'tdma_prot' : f'{objects.sh_200x_url()[0]}cp3?da=1',
+    'tdma_bw' : f'{objects.sh_200x_url()[0]}cj3?da=1',
+    'tdma_acm' : f'{objects.sh_200x_url()[0]}cg3?da=1',
+    'roaming' : f'{objects.sh_200x_url()[0]}co3?da=1'
 })
-
-
-
-
-#
-# test = parser_methods(sh_profile['tdm_tx'])
-# print(test.select('de'))
-
-
-
-
-
-# print(test.values())
-# print(test.checkboxes())
-# print(test.select())

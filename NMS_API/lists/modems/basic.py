@@ -1,18 +1,18 @@
-controller = ['controlleredit[name]','controlleredit[enabled]']
+controller = ['name','enabled']
 
-hw = ['controlleredit[teleport_id]','controlleredit[rffeed_id]','controlleredit[modem_id]']
+hw = ['teleport_id'],['rffeed_id'],['modem_id']
 
-id = ['controlleredit[id_net]','controlleredit[id_rf]']
+id = ['id_net','id_rf']
 
-threshold = ['controlleredit[cn_high]','controlleredit[cn_low]']
+threshold = ['cn_high','cn_low']
 
-mod_que = ['controlleredit[mod_queue_1]',
-           'controlleredit[mod_queue_2]',
-           'controlleredit[mod_queue_3]',
-           'controlleredit[mod_queue_4]',
-           'controlleredit[mod_queue_5]',
-           'controlleredit[mod_queue_6]',
-           'controlleredit[mod_queue_7]',
-           'controlleredit[mod_queue_8]']
+mod_que = ['mod_queue_1',
+           'mod_queue_2',
+           'mod_queue_3',
+           'mod_queue_4',
+           'mod_queue_5',
+           'mod_queue_6',
+           'mod_queue_7',
+           'mod_queue_8']
 
-optional = ['controlleredit[order_num]']
+optional = ['order_num']

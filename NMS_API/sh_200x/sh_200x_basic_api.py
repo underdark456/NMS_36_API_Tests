@@ -13,6 +13,3 @@ def mod_que():
            sh_200x_json()['data'][basic.mod_que[5]], \
            sh_200x_json()['data'][basic.mod_que[6]], \
            sh_200x_json()['data'][basic.mod_que[7]], \
-
-
-

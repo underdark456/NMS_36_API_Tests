@@ -28,6 +28,39 @@ def sh_200x_json():
     parsed = json.dumps(resp.json(), indent=4, sort_keys=True)
     return json.loads(parsed)
 
+def sh_profile_url(ip):
+    return dict({
+    'basic' : f'http://{ip}/cb3?da=1',
+    'tdm_rx' : f'http://{ip}/cr3?da=1',
+    'tdm_tx' : f'http://{ip}/ct3?da=1',
+    'mod' : f'http://{ip}/cm3?da=1',
+    'timing' : f'http://{ip}/ci3?da=1',
+    'tlc' : f'http://{ip}/cl3?da=1',
+    'tdm_acm' : f'http://{ip}/ca3?da=1',
+    'tdma_rf' : f'http://{ip}/cd3?da=1',
+    'tdma_prot' : f'http://{ip}/cp3?da=1',
+    'tdma_bw' : f'http://{ip}/cj3?da=1',
+    'tdma_acm' : f'http://{ip}/cg3?da=1',
+    'roaming' : f'http://{ip}/co3?da=1',
+    'site_setup': f'http://{ip}/cc2'
+})
+
+def ip_prot_url(ip):
+    return dict({
+        'snmp': f'http://{ip}/cc9',
+        'dhcp': f'http://{ip}/cc8',
+        'dns': f'http://{ip}/cc59',
+        'arp': f'http://{ip}/cc23',
+        'nat': f'http://{ip}/cc7',
+        'rip': f'http://{ip}/cc10',
+        'sntp': f'http://{ip}/cc11',
+        'rtp': f'http://{ip}/ss38',
+        'tftp': f'http://{ip}/cc21',
+        'gtp': f'http://{ip}/ss62',
+        'multicast': f'http://{ip}/cc39',
+        'acceleration': f'http://{ip}/cc12',
+        'other': f'http://{ip}/cc13'
+    })
 
 def ss_100x_url():
     url_uhp = 'http://10.0.3.155/'

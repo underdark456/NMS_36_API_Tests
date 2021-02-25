@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import objects
 
 
 class parser_methods():
@@ -10,24 +9,24 @@ class parser_methods():
         self.soup = BeautifulSoup(self.response.text, 'lxml')
 
     def values(self):
-        return tuple([element['value'] for element in self.soup.findAll('input', {'type': 'text'})])
+        return list([element['value'] for element in self.soup.findAll('input', {'type': 'text'})])
 
     def checkboxes(self):
         result = list('')
         for element in self.soup.findAll('input', {'type': 'checkbox'}):
             if element.has_attr('name'):
                 result.append(element['value'])
-        return tuple(result)
+        return result
 
     def selects(self):
-        return tuple([element['value'] for element in self.soup.findAll('option', selected=True)])
+        return [element['value'] for element in self.soup.findAll('option', selected=True)]
 
     def checkings(self):
-        return tuple([element['value'] for element in self.soup.findAll('input', checked=True)])
+        return [element['value'] for element in self.soup.findAll('input', checked=True)]
 
     def value(self):
         for i in self.soup.findAll('input', type=lambda x: x != 'hidden'):
-            return tuple(i['value'])
+            return i['value']
 
     def name_value(self,name):
             return [self.soup.find('input', attrs={'name': f'{name}'})['value']]
@@ -35,29 +34,15 @@ class parser_methods():
     def select(self,name):
         for element in self.soup.find('select', attrs={'name': f'{name}'}):
             if element.has_attr('selected'):
-                return tuple([element['value']])
+                return list(element['value'])
 
     def f_sel_text(self,name):
-        return self.soup.find(f'{name}', selected=True).text,
+        return self.soup.find(f'{name}', selected=True).text
 
     def check_mode(self,name):
         if 'checked' in self.soup.find('input',{"name":f"{name}"}).attrs:
-            return '1',
+            return list('1')
         else:
-            return '0',
+            return list('0')
 
 
-sh_profile = dict({
-    'basic' : f'{objects.sh_200x_url()[0]}cb3?da=1',
-    'tdm_rx' : f'{objects.sh_200x_url()[0]}cr3?da=1',
-    'tdm_tx' : f'{objects.sh_200x_url()[0]}ct3?da=1',
-    'mod' : f'{objects.sh_200x_url()[0]}cm3?da=1',
-    'timing' : f'{objects.sh_200x_url()[0]}ci3?da=1',
-    'tlc' : f'{objects.sh_200x_url()[0]}cl3?da=1',
-    'tdm_acm' : f'{objects.sh_200x_url()[0]}ca3?da=1',
-    'tdma_rf' : f'{objects.sh_200x_url()[0]}cd3?da=1',
-    'tdma_prot' : f'{objects.sh_200x_url()[0]}cp3?da=1',
-    'tdma_bw' : f'{objects.sh_200x_url()[0]}cj3?da=1',
-    'tdma_acm' : f'{objects.sh_200x_url()[0]}cg3?da=1',
-    'roaming' : f'{objects.sh_200x_url()[0]}co3?da=1'
-})

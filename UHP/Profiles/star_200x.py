@@ -59,14 +59,16 @@ def tdma_bw():
            + tdma_bw.check_mode('dv')
 
 def tdma_acm():
-    '''Проверка только по 12 модкодам, добавить легаси'''
     tdma_acm = parser_methods(sh_profile_url('10.0.3.149')['tdma_acm'])
     cn_th = tdma_acm.values()[0] + '.' + tdma_acm.values()[1]
-    return tdma_acm.check_mode('db') + tdma_acm.select('dc') + tdma_acm.check_mode('dh') + tdma_acm.check_mode('dl') \
+    if tdma_acm.select('dc') == ['1']:
+        return tdma_acm.check_mode('db') + tdma_acm.select('dc') + tdma_acm.check_mode('dh') + tdma_acm.check_mode('dl') \
            + tdma_acm.check_mode('dp') + tdma_acm.check_mode('di') + tdma_acm.check_mode('dm') \
            + tdma_acm.check_mode('dq') + tdma_acm.check_mode('dj') + tdma_acm.check_mode('dn') \
            + tdma_acm.check_mode('dr') + tdma_acm.check_mode('dk') + tdma_acm.check_mode('do') \
            + tdma_acm.check_mode('ds') + cn_th.split()
+    else:
+        return tdma_acm.check_mode('db') + tdma_acm.select('dc') + cn_th.split()
 
 def roaming():
     roaming = parser_methods(sh_profile_url('10.0.3.149')['roaming'])

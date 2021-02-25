@@ -1,8 +1,10 @@
+from lists.modems import rf_setup
 from objects import sh_200x_url
 from objects import ip_prot_url
 from sh_200x import sh_200x_ip_protocols_api, sh_200x_rf
 from Menu import uhp_ip_protocols
 from Profiles import star_200x
+from objects import sh_200x_json
 import unittest
 
 ip = '10.0.3.149'
@@ -78,16 +80,19 @@ class test_profile(unittest.TestCase):
         self.assertEqual(sh_200x_rf.tdma_bw(), star_200x.tdma_bw())
 
     def test_tdma_acm(self):
-        lst = list(sh_200x_rf.tdma_acm()[2:14])
-        for i, v in enumerate(lst):
-            if v!= '0':
-                lst[i] = '1'
-        cn = sh_200x_rf.tdma_acm()[14]
-        self.assertEqual(list(sh_200x_rf.tdma_acm()[0:2]) + lst + cn.split(), star_200x.tdma_acm())
+        if sh_200x_json()['data'][rf_setup.tdma_acm[1]] == '1':
+            lst = list(sh_200x_rf.tdma_acm()[2:14])
+            for i, v in enumerate(lst):
+                if v != '0':
+                    lst[i] = '1'
+            cn = sh_200x_rf.tdma_acm()[14]
+            self.assertEqual(list(sh_200x_rf.tdma_acm()[0:2]) + lst + cn.split(), star_200x.tdma_acm())
+        else:
+            self.assertEqual(list(sh_200x_rf.tdma_acm()), star_200x.tdma_acm())
 
     def roaming(self):
         self.assertEqual(sh_200x_rf.roaming(), star_200x.roaming())
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
 

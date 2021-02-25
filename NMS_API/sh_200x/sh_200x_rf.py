@@ -8,7 +8,6 @@ def mod():
 def tdm_tx():
        return values_(rf_setup.tdm_tx)
 
-
 def acm():
        return values_(rf_setup.acm)
 
@@ -30,7 +29,8 @@ tdma_modcod = tdma_rf_dict[tdma_rf()[1]] #Нужно для теста.Проб�
 
 
 def tdma_acm():
-    return sh_200x_json()['data'][rf_setup.tdma_acm[0]], \
+       if sh_200x_json()['data'][rf_setup.tdma_acm[1]] == '1':
+              return sh_200x_json()['data'][rf_setup.tdma_acm[0]], \
            sh_200x_json()['data'][rf_setup.tdma_acm[1]], \
            sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[0]], \
            sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[1]], \
@@ -45,6 +45,10 @@ def tdma_acm():
            sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[10]], \
            sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[11]], \
            sh_200x_json()['data'][rf_setup.tdma_acm[3]]
+       else:
+              return sh_200x_json()['data'][rf_setup.tdma_acm[0]], \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[1]], \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[3]]
 
 def tdma_prot():
        return values_(rf_setup.tdma_prot)
@@ -60,3 +64,4 @@ def tdma_time():
 
 def tlc():
        return values_(rf_setup.tlc)
+

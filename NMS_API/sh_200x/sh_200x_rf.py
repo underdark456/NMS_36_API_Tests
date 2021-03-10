@@ -8,7 +8,6 @@ def mod():
 def tdm_tx():
        return values_(rf_setup.tdm_tx)
 
-
 def acm():
        return values_(rf_setup.acm)
 
@@ -30,21 +29,33 @@ tdma_modcod = tdma_rf_dict[tdma_rf()[1]] #Нужно для теста.Проб�
 
 
 def tdma_acm():
-    return sh_200x_json()['data'][rf_setup.tdma_acm[0]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[1]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[0]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[1]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[2]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[3]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[4]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[5]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[6]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[7]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[8]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[9]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[10]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[11]], \
-           sh_200x_json()['data'][rf_setup.tdma_acm[3]]
+       if sh_200x_json()['data'][rf_setup.tdma_acm[1]] == '0':
+              return list(sh_200x_json()['data'][rf_setup.tdma_acm[0]] + sh_200x_json()['data'][rf_setup.tdma_acm[1]])
+       else:
+              return list(sh_200x_json()['data'][rf_setup.tdma_acm[0]] + sh_200x_json()['data'][rf_setup.tdma_acm[1]]) + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[0]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[1]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[2]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[3]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[4]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[5]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[6]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[7]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[8]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[9]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[10]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[11]].split() + \
+                     sh_200x_json()['data'][rf_setup.tdma_acm[3]]
+
+print(tdma_acm())
+# def lol():
+#        list_ = []
+#        for i in range(0,11):
+#               values_ = sh_200x_json()['data'][rf_setup.tdma_acm[2]][rf_setup.tdma_acm_modcod[i]]
+#               list_.append(values_)
+#        return list_
+
+
 
 def tdma_prot():
        return values_(rf_setup.tdma_prot)

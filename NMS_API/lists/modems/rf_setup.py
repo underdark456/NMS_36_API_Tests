@@ -25,7 +25,7 @@ tdma_rf = ['tdmrf_input', 'tdmrf_symrate', 'tdmrf_fec', 'tdmrf_rolloff_5', 'ldpc
            'tdmrf_txfreq_13','tdmrf_rxfreq_14',
            'tdmrf_txfreq_14','tdmrf_rxfreq_15']
 
-tdma_acm = ['tdmrf_acm', 'tdmrf_mode','tdma_acm_modcod','tdmrf_cn_threshold',]
+tdma_acm = ['tdmrf_acm', 'tdmrf_mode','tdma_acm_modcod','tdma_acm_thr']
 
 tdma_acm_modcod = ['cb0', 'cb1', 'cb2', 'cb3', 'cb4', 'cb5', 'cb6', 'cb7', 'cb8', 'cb9', 'cb10', 'cb11']
 

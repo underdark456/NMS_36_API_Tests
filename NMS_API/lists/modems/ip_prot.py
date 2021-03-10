@@ -28,8 +28,8 @@ nat = ['nat_enable','nat_external_ip','nat_internal_network',
 
 nat_port = ['portmappingexternal_port','portmappinginternal_ip','portmappinginternal_port']
 
-rip = ['rip_enable','rip_gateway_ip','rip_omit_down_stations',
-      'rip_couple_to_sm_alarms','rip_routes_cost']
+rip = ['rip_enable','rip_routes_cost','rip_update_interval','rip_clear_interval','rip_auth_enable','rip_auth_key',
+       'rip_gateway_ip','rip_omit_down_stations','rip_couple_to_sm_alarms']
 
 sntp = ['sntp_mode','sntp_ip','sntp_vlan']
 

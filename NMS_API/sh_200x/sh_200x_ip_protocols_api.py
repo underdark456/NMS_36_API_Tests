@@ -31,6 +31,7 @@ def ip_screening():
     return values_(ip_prot.screen)
 
 def snmp():
+    '''http://redmine.eastar.ru/issues/7364'''
     return values_(ip_prot.snmp)
 
 def tftp():

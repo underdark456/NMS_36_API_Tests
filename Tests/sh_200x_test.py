@@ -2,6 +2,7 @@ from objects import sh_200x_url
 from objects import ip_prot_url
 from sh_200x import sh_200x_ip_protocols_api, sh_200x_rf
 from Menu import uhp_ip_protocols
+from UHP.main_page import sw_version
 from Profiles import star_200x
 import unittest
 
@@ -28,7 +29,11 @@ class test_ip_prots(unittest.TestCase):
         self.assertEqual(uhp_ip_protocols.NAT(ip_prot_url(ip)['nat']), list(sh_200x_ip_protocols_api.nat()))
 
     def test_rip(self):
-        self.assertEqual(uhp_ip_protocols.RIP(ip_prot_url(ip)['rip']), sh_200x_ip_protocols_api.rip())
+        if sw_version('10.0.3.149')[0:3] == str('3.7'):
+            return self.assertEqual(uhp_ip_protocols.RIP(ip_prot_url(ip)['rip']), sh_200x_ip_protocols_api.rip()[0:6])
+        else:
+            return self.assertEqual(uhp_ip_protocols.RIP(ip_prot_url(ip)['rip']), sh_200x_ip_protocols_api.rip()[0:2] + \
+                   sh_200x_ip_protocols_api.rip()[6:9])
 
     def test_sntp(self):
         self.assertEqual(uhp_ip_protocols.SNTP(ip_prot_url(ip)['sntp']), sh_200x_ip_protocols_api.sntp())
@@ -82,12 +87,21 @@ class test_profile(unittest.TestCase):
         for i, v in enumerate(lst):
             if v!= '0':
                 lst[i] = '1'
-        cn = sh_200x_rf.tdma_acm()[14]
-        self.assertEqual(list(sh_200x_rf.tdma_acm()[0:2]) + lst + cn.split(), star_200x.tdma_acm())
+        self.assertEqual(list(sh_200x_rf.tdma_acm()[0:2]) + lst + sh_200x_rf.tdma_acm()[14:27] , star_200x.tdma_acm())
 
     def roaming(self):
         self.assertEqual(sh_200x_rf.roaming(), star_200x.roaming())
 
 if __name__ == '__main__':
-    unittest.main()
+     unittest.main()
+
+# def test_tdma_acm():
+#     lst = list(sh_200x_rf.tdma_acm()[2:14])
+#     print(lst)
+#     for i, v in enumerate(lst):
+#         if v!= '0':
+#             lst[i] = '1'
+#     print(lst)
+#         # return list(sh_200x_rf.tdma_acm()[0:2]) + lst, star_200x.tdma_acm()
+#     return list(sh_200x_rf.tdma_acm()[0:2]) + lst + sh_200x_rf.tdma_acm()[14:27] , star_200x.tdma_acm()
 

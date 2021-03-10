@@ -30,6 +30,7 @@ def sh_200x_json():
 
 def sh_profile_url(ip):
     return dict({
+    'main_page' : f'http:/{ip}/',
     'basic' : f'http://{ip}/cb3?da=1',
     'tdm_rx' : f'http://{ip}/cr3?da=1',
     'tdm_tx' : f'http://{ip}/ct3?da=1',

@@ -1,9 +1,9 @@
 from parser_template import parser_methods as p
-from objects import sh_200x_url
+
 
 def SNMP(url):
     snmp = p(url)
-    return snmp.values()
+    return snmp.name_value('ia') + snmp.name_value('ib') + snmp.name_value('tb') + snmp.name_value('tc')
 
 def DHCP(url):
     dhcp = p(url)
@@ -28,8 +28,8 @@ def NAT(url):
 
 def RIP(url):
     rip = p(url)
-    return rip.check_mode('db') + rip.name_value('ia') + rip.check_mode('dc') + rip.check_mode('dd') + rip.name_value(
-        'de')
+    return rip.check_mode('db') + rip.name_value('de') + rip.name_value('dc') + rip.name_value('dd') + \
+           rip.check_mode('df') + rip.name_value('tg')
 
 
 def SNTP(url):
